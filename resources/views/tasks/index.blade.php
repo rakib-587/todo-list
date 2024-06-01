@@ -15,6 +15,28 @@
                             Create Task
                         </a>
                     </div>
+
+                    <!-- Search and Filter Form -->
+                    <form method="GET" action="{{ route('tasks.index') }}" class="mb-4">
+                        <div class="flex flex-wrap -mx-2">
+                            <div class="w-full md:w-1/2 px-2 mb-2 md:mb-0">
+                                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by title" class="w-full p-2 border rounded">
+                            </div>
+                            <div class="w-full md:w-1/4 px-2 mb-2 md:mb-0">
+                                <select name="status" class="w-full p-2 border rounded">
+                                    <option value="all" {{ request('status') == 'all' ? 'selected' : '' }}>All</option>
+                                    <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                                    <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Completed</option>
+                                </select>
+                            </div>
+                            <div class="w-full md:w-1/4 px-2 mb-2 md:mb-0">
+                                <button type="submit" class="w-full bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                                    Filter
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead>

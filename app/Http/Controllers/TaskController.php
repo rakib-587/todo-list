@@ -13,9 +13,22 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = auth()->user()->tasks()->orderBy('id', 'desc')->get();
+        $query = auth()->user()->tasks();
+
+        // Handle search by title
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%' . $request->input('search') . '%');
+        }
+
+        // Handle filter by status
+        if ($request->filled('status') && $request->input('status') !== 'all') {
+            $query->where('status', $request->input('status'));
+        }
+
+        $tasks = $query->orderBy('id', 'desc')->get();
+
         return view('tasks.index', compact('tasks'));
     }
 
