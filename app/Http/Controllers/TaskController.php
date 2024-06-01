@@ -32,7 +32,7 @@ class TaskController extends Controller
             $query->where('status', $request->input('status'));
         }
 
-        $tasks = $query->orderBy('id', 'desc')->get();
+        $tasks = $query->orderBy('id', 'desc')->paginate(10);
 
         return view('tasks.index', compact('tasks'));
     }

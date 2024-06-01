@@ -78,6 +78,9 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="p-4 my-4 light">
+                        {{ $tasks->links() }}
+                    </div>
                 </div>
             </div>
         </div>
