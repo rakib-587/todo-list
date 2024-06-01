@@ -90,4 +90,15 @@ class TaskController extends Controller
         $task->delete();
         return redirect()->route('tasks.index');
     }
+
+    public function complete(Task $task)
+    {
+        $this->authorize('update', $task);
+
+        $task->update([
+            'status' => 'completed',
+        ]);
+
+        return redirect()->route('tasks.index');
+    }
 }

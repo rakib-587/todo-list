@@ -80,6 +80,12 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="text-red-600 hover:text-red-900 ml-2">Delete</button>
                                             </form>
+                                            @if ($task->status != 'completed')
+                                                <form action="{{ route('tasks.complete', $task) }}" method="POST" class="inline">
+                                                    @csrf
+                                                    <button type="submit" class="text-green-600 hover:text-green-900 ml-2">Complete</button>
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
