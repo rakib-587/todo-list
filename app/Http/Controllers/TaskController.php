@@ -22,6 +22,11 @@ class TaskController extends Controller
             $query->where('title', 'like', '%' . $request->input('search') . '%');
         }
 
+        // Handle filter by priority
+        if ($request->filled('priority') && $request->input('priority') !== 'all') {
+            $query->where('priority', $request->input('priority'));
+        }
+
         // Handle filter by status
         if ($request->filled('status') && $request->input('status') !== 'all') {
             $query->where('status', $request->input('status'));
@@ -49,6 +54,7 @@ class TaskController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'due_date' => 'required|date',
+            'priority' => 'required|in:low,medium,high',
         ]);
 
         auth()->user()->tasks()->create($validated);
@@ -75,6 +81,7 @@ class TaskController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'due_date' => 'required|date',
+            'priority' => 'required|in:low,medium,high',
         ]);
 
         $task->update($validated);

@@ -28,6 +28,15 @@
                             <input type="date" name="due_date" value="{{ $task->due_date }}" class="w-full p-2 border rounded" required>
                         </div>
 
+                        <div class="mb-4">
+                            <label class="block text-gray-700">Priority</label>
+                            <select name="priority" class="w-full p-2 border rounded" required>
+                                <option value="low" {{ $task->priority == 'low' ? 'selected' : '' }}>Low</option>
+                                <option value="medium" {{ $task->priority == 'medium' ? 'selected' : '' }}>Medium</option>
+                                <option value="high" {{ $task->priority == 'high' ? 'selected' : '' }}>High</option>
+                            </select>
+                        </div>
+
                         <div class="flex justify-end">
                             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                 Update Task
