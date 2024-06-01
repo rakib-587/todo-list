@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Task;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -22,7 +23,7 @@ class UserSeeder extends Seeder
         ]);
 
         // Create a test user
-        User::create([
+        $user = User::create([
             'name' => 'Test User',
             'email' => 'test@example.com',
             'email_verified_at' => now(),
@@ -30,6 +31,8 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
             'role' => 'employee', // assuming you have a role column in your users table
         ]);
+
+        Task::factory()->count(50)->create(['user_id' => $user->id]);
 
         // Create additional random users if needed
         User::factory()->count(10)->create();
