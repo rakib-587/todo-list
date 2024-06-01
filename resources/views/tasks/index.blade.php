@@ -56,7 +56,7 @@
                                             <a href="{{ route('tasks.edit', $task) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
                                                 Edit
                                             </a>
-                                            <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="inline-block">
+                                            <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="inline-block" onsubmit="return confirmDelete()">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
@@ -82,4 +82,10 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function confirmDelete() {
+            return confirm('Are you sure you want to delete this task?');
+        }
+    </script>
 </x-app-layout>
